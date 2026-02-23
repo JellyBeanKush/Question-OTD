@@ -111,8 +111,8 @@ async function main() {
             color: 0x3498db,
             fields: [
                 {
-                    name: "\u200B", // Invisible character to create spacing
-                    value: `## ${questionText}`, // Large header style for the question box
+                    name: "\u200B", 
+                    value: `**${questionText}**`, // Changed from ## to **
                     inline: false
                 }
             ],
