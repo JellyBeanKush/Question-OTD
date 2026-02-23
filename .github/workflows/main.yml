@@ -1,15 +1,29 @@
-- name: Run Question of the Day
+name: Daily Question
+on:
+  schedule:
+    - cron: '0 15 * * *' # Runs at 7am PT / 10am ET
+  workflow_dispatch: # Lets you run it manually to test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Run Question Script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DISCORD_QUESTION_WEBHOOK: ${{ secrets.DISCORD_QUESTION_WEBHOOK }}
         run: node question.mjs
-
-      - name: Commit changes
+      - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          # This adds all text and history files for all bots
-          git add current_*.txt *_history.json
-          if [ -f message_id.txt ]; then git add message_id.txt; fi
-          git commit -m "Update Dailies: ?OTD and Horoscopes [skip ci]" || echo "No changes to commit"
+          git add current_question.txt question_history.json
+          git commit -m "Update ?OTD" || echo "No changes"
           git push
