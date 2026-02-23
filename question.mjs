@@ -7,7 +7,6 @@ const CONFIG = {
     DISCORD_URL: process.env.DISCORD_QUESTION_WEBHOOK, 
     SAVE_FILE: 'current_question.txt',
     HISTORY_FILE: 'question_history.json',
-    // 2.5 is the priority, 1.5 is the reliable backup
     MODELS: ["gemini-2.5-flash", "gemini-1.5-flash"] 
 };
 
@@ -30,9 +29,18 @@ async function getNaturalContext() {
     } catch (e) {}
 
     const funHolidays = {
-        "2-24": "National Tortilla Chip Day", "2-26": "National Toast Day",
+        "1-2": "Science Fiction Day", "1-25": "Opposite Day",
+        "2-9": "National Pizza Day", "2-24": "National Tortilla Chip Day", "2-26": "National Toast Day",
         "3-10": "Mario Day", "3-14": "Pi Day", "3-20": "First Day of Spring",
-        "5-4": "Star Wars Day", "9-19": "Talk Like a Pirate Day", "10-31": "Halloween"
+        "4-1": "April Fools' Day", "4-22": "Jelly Bean Day", "4-28": "Superhero Day",
+        "5-4": "Star Wars Day", "5-21": "Talk Like Yoda Day", "5-24": "Scavenger Hunt Day",
+        "6-21": "First Day of Summer", "6-24": "Food Truck Day", "6-30": "Social Media Day",
+        "7-2": "World UFO Day", "7-13": "Embrace Your Geekness Day", "7-17": "World Emoji Day",
+        "8-8": "International Cat Day", "8-13": "Lefthanders Day", "8-24": "Strange Music Day",
+        "9-12": "Video Games Day", "9-19": "Talk Like a Pirate Day", "9-22": "First Day of Fall",
+        "10-1": "International Coffee Day", "10-20": "Sloth Day", "10-31": "Halloween",
+        "11-4": "National Candy Day", "11-14": "Pickle Day", "11-17": "Take a Hike Day", "11-21": "False Confession Day",
+        "12-5": "Day of the Ninja", "12-15": "Ugly Sweater Day", "12-21": "First Day of Winter"
     };
 
     const currentFunDay = funHolidays[`${month}-${day}`];
@@ -57,37 +65,43 @@ async function main() {
     const prompt = `Generate one "Question of the Day."
     Current Theme: ${context.theme}
     Style:
-    - If it's a major Food/Gamer/Holiday, mention it. Otherwise, just ask a question inspired by the theme.
+    - If it's a major Food/Gamer/Holiday (like Taco Tuesday or Mario Day), mention it. 
+    - Otherwise, do NOT mention the day's name (like Sloth Day). Just ask a question inspired by it.
     - Grounded in reality. No abstract scenarios.
     - DO NOT repeat themes or questions similar to: ${history.map(h => h.question).slice(0, 30).join(" | ")}
     Return ONLY the question text.`;
 
     let questionText = null;
 
-    // TRY MODELS IN ORDER
     for (const modelName of CONFIG.MODELS) {
         try {
             console.log(`Attempting with ${modelName}...`);
             const model = genAI.getGenerativeModel({ model: modelName });
             const result = await model.generateContent(prompt);
             questionText = result.response.text().trim().replace(/["']/g, "");
-            console.log(`Successfully generated using ${modelName}`);
+            console.log(`Success using ${modelName}`);
             break; 
         } catch (err) {
-            // Check for rate limits (429) or overloaded models (503)
             if ((err.status === 429 || err.status === 503) && modelName !== CONFIG.MODELS[CONFIG.MODELS.length - 1]) {
-                console.warn(`${modelName} unavailable/quota hit. Falling back...`);
+                console.warn(`${modelName} quota hit. Falling back...`);
                 continue; 
             }
             throw err; 
         }
     }
 
-    if (!questionText) throw new Error("Could not generate content from any available model.");
+    if (!questionText) throw new Error("All models failed.");
 
+    // Save for Mix It Up
     fs.writeFileSync(CONFIG.SAVE_FILE, questionText);
     history.unshift({ date: todayFormatted, question: questionText });
     fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(history, null, 2));
+
+    // Discord Logic with URL Guard
+    if (!CONFIG.DISCORD_URL || CONFIG.DISCORD_URL.trim() === "") {
+        console.warn("⚠️ DISCORD_QUESTION_WEBHOOK is empty. Skipping Discord post.");
+        return;
+    }
 
     const payload = {
         embeds: [{
