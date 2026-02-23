@@ -1,0 +1,11 @@
+{
+  "name": "daily-bots",
+  "version": "1.0.0",
+  "description": "Daily automated content for Discord and Twitch",
+  "main": "index.mjs",
+  "type": "module",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "node-fetch": "^3.3.2"
+  }
+}
