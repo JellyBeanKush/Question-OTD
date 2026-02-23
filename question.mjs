@@ -4,7 +4,8 @@ import fs from 'fs';
 
 const CONFIG = {
     GEMINI_KEY: process.env.GEMINI_API_KEY,
-    DISCORD_URL: process.env.DISCORD_QUESTION_WEBHOOK, // Ensure this URL includes the ?thread_id=
+    DISCORD_URL: process.env.DISCORD_QUESTION_WEBHOOK, 
+    SAVE_FILE: 'current_question.txt',
     HISTORY_FILE: 'question_history.json',
     PRIMARY_MODEL: "gemini-2.5-flash"
 };
@@ -17,19 +18,16 @@ async function postToDiscord(question) {
         embeds: [{
             title: `❓ ?OTD — ${todayFormatted}`,
             description: `### ${question}`,
-            color: 0x3498db // Blue
+            color: 0x3498db,
+            footer: { text: "Reply in this thread to join the conversation!" }
         }]
     };
 
-    const response = await fetch(CONFIG.DISCORD_URL, { 
+    await fetch(CONFIG.DISCORD_URL, { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify(payload) 
     });
-
-    if (!response.ok) {
-        console.error("Discord Error:", await response.text());
-    }
 }
 
 async function main() {
@@ -46,20 +44,24 @@ async function main() {
     const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_KEY);
     const model = genAI.getGenerativeModel({ model: CONFIG.PRIMARY_MODEL });
 
-    // Custom prompt for your streaming community
-    const prompt = `Generate one fun, engaging "Question of the Day" for a Discord community of gamers and Twitch viewers. 
-    Focus on gaming memories, streaming "hot takes," or tech preferences. 
-    Make it conversational and open-ended. Return ONLY the question text.`;
+    // Passing the entire history to Gemini so it knows what to avoid
+    const prompt = `Generate one engaging Question of the Day for a gaming and Twitch community. 
+    Focus on gaming memories, streaming "hot takes," or tech. 
+    AVOID these previous questions: ${history.map(h => h.question).join(", ")}.
+    Return ONLY the question text.`;
 
     try {
         const result = await model.generateContent(prompt);
         const questionText = result.response.text().trim();
 
+        fs.writeFileSync(CONFIG.SAVE_FILE, questionText);
+
         history.unshift({ date: todayFormatted, question: questionText });
-        fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(history.slice(0, 30), null, 2));
+        // REMOVED .slice(0, 30) to keep history infinite
+        fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(history, null, 2));
 
         await postToDiscord(questionText);
-        console.log("Question posted to thread successfully.");
+        console.log("?OTD posted with infinite history tracking.");
     } catch (err) {
         console.error("Critical Failure:", err);
         process.exit(1);
