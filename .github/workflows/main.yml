@@ -1,29 +1,35 @@
-name: Daily Question
+name: Question of the Day
+
 on:
   schedule:
-    - cron: '0 15 * * *' # Runs at 7am PT / 10am ET
-  workflow_dispatch: # Lets you run it manually to test
+    - cron: '0 16 * * *' # Runs at 9 AM Pacific / 12 PM Eastern
+  workflow_dispatch:      # Allows you to run it manually for testing
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install dependencies
+
+      - name: Install Dependencies
         run: npm install
-      - name: Run Question Script
+
+      - name: Run Script
+        run: node question.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DISCORD_QUESTION_WEBHOOK: ${{ secrets.DISCORD_QUESTION_WEBHOOK }}
-        run: node question.mjs
-      - name: Commit and Push
+
+      - name: Commit and Push History
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
           git add current_question.txt question_history.json
-          git commit -m "Update ?OTD" || echo "No changes"
+          git commit -m "Update Question of the Day [skip ci]" || echo "No changes to commit"
           git push
