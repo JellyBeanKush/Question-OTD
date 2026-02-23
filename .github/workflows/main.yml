@@ -1,0 +1,15 @@
+- name: Run Question of the Day
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DISCORD_QUESTION_WEBHOOK: ${{ secrets.DISCORD_QUESTION_WEBHOOK }}
+        run: node question.mjs
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          # This adds all text and history files for all bots
+          git add current_*.txt *_history.json
+          if [ -f message_id.txt ]; then git add message_id.txt; fi
+          git commit -m "Update Dailies: ?OTD and Horoscopes [skip ci]" || echo "No changes to commit"
+          git push
