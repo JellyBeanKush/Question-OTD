@@ -1,8 +1,6 @@
 {
-  "name": "daily-bots",
+  "name": "question-otd",
   "version": "1.0.0",
-  "description": "Daily automated content for Discord and Twitch",
-  "main": "index.mjs",
   "type": "module",
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
