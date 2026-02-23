@@ -103,12 +103,20 @@ async function main() {
         return;
     }
 
+    // ... (Everything above this in main() stays the same) ...
+
     const payload = {
         embeds: [{
-            title: `❓ ?OTD — ${todayFormatted}`,
-            description: `### ${questionText}`,
+            title: `📅 Question of the Day — ${todayFormatted}`,
             color: 0x3498db,
-            footer: { text: "Reply in this thread to join the conversation!" }
+            fields: [
+                {
+                    name: "\u200B", // Invisible character to create spacing
+                    value: `## ${questionText}`, // Large header style for the question box
+                    inline: false
+                }
+            ],
+            footer: { text: "Reply to this message to answer!" }
         }]
     };
 
