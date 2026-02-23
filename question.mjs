@@ -65,10 +65,11 @@ async function main() {
     const prompt = `Generate one "Question of the Day."
     Current Theme: ${context.theme}
     Style:
-    - If it's a major Food/Gamer/Holiday (like Taco Tuesday or Mario Day), mention it. 
-    - Otherwise, do NOT mention the day's name (like Sloth Day). Just ask a question inspired by it.
-    - Grounded in reality. No abstract scenarios.
-    - DO NOT repeat themes or questions similar to: ${history.map(h => h.question).slice(0, 30).join(" | ")}
+    - If it's a major Food/Gamer/Holiday, mention it. Otherwise, don't.
+    - Keep it casual and fun for a Twitch gaming community. 
+    - Avoid "corporate" or "self-help" sounding questions. 
+    - No abstract scenarios (like living in bread).
+    - DO NOT repeat themes: ${history.map(h => h.question).slice(0, 30).join(" | ")}
     Return ONLY the question text.`;
 
     let questionText = null;
