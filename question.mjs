@@ -7,7 +7,13 @@ const CONFIG = {
     DISCORD_URL: process.env.DISCORD_QUESTION_WEBHOOK, 
     SAVE_FILE: 'current_question.txt',
     HISTORY_FILE: 'question_history.json',
-    MODELS: ["gemini-2.5-flash", "gemini-1.5-flash"] 
+    // UPDATED: Floating aliases for 2026 autopilot
+    MODELS: [
+        "gemini-flash-latest", // Currently Gemini 3.1 Flash-Lite
+        "gemini-pro-latest",   // Currently Gemini 3.1 Pro
+        "gemini-2.5-flash", 
+        "gemini-1.5-flash"
+    ]
 };
 
 const today = new Date();
@@ -57,7 +63,10 @@ async function main() {
         try { history = JSON.parse(fs.readFileSync(CONFIG.HISTORY_FILE, 'utf8')); } catch (e) {}
     }
 
-    if (history.length > 0 && history[0].date === todayFormatted) return;
+    if (history.length > 0 && history[0].date === todayFormatted) {
+        console.log("Already generated a question for today.");
+        return;
+    }
 
     const context = await getNaturalContext();
     const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_KEY);
@@ -76,18 +85,20 @@ async function main() {
 
     for (const modelName of CONFIG.MODELS) {
         try {
-            console.log(`Attempting with ${modelName}...`);
+            console.log(`Attempting QOTD with ${modelName}...`);
             const model = genAI.getGenerativeModel({ model: modelName });
             const result = await model.generateContent(prompt);
             questionText = result.response.text().trim().replace(/["']/g, "");
+            
             console.log(`Success using ${modelName}`);
             break; 
         } catch (err) {
-            if ((err.status === 429 || err.status === 503) && modelName !== CONFIG.MODELS[CONFIG.MODELS.length - 1]) {
-                console.warn(`${modelName} quota hit. Falling back...`);
-                continue; 
+            console.warn(`⚠️ ${modelName} failed: ${err.message}`);
+            if (err.status === 429) {
+                console.warn("Rate limited. Waiting 10s...");
+                await new Promise(r => setTimeout(r, 10000));
             }
-            throw err; 
+            if (modelName === CONFIG.MODELS[CONFIG.MODELS.length - 1]) throw err;
         }
     }
 
@@ -96,15 +107,13 @@ async function main() {
     // Save for Mix It Up
     fs.writeFileSync(CONFIG.SAVE_FILE, questionText);
     history.unshift({ date: todayFormatted, question: questionText });
-    fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(history, null, 2));
+    fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(history.slice(0, 100), null, 2));
 
-    // Discord Logic with URL Guard
+    // Discord Logic
     if (!CONFIG.DISCORD_URL || CONFIG.DISCORD_URL.trim() === "") {
         console.warn("⚠️ DISCORD_QUESTION_WEBHOOK is empty. Skipping Discord post.");
         return;
     }
-
-    // ... (Everything above this in main() stays the same) ...
 
     const payload = {
         embeds: [{
@@ -113,7 +122,7 @@ async function main() {
             fields: [
                 {
                     name: "\u200B", 
-                    value: `**${questionText}**`, // Changed from ## to **
+                    value: `**${questionText}**`,
                     inline: false
                 }
             ],
@@ -126,6 +135,8 @@ async function main() {
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify(payload) 
     });
+    
+    console.log("Success! Posted to Discord and saved current_question.txt.");
 }
 
 main().catch(err => {
