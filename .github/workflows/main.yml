@@ -1,12 +1,13 @@
-name: Question of the Day
+name: Daily Question Bot
 
 on:
   schedule:
-    - cron: '0 16 * * *' # Runs at 9 AM Pacific / 12 PM Eastern
-  workflow_dispatch:      # Allows you to run it manually for testing
+    # Runs at 16:00 UTC (9:00 AM PST) every day
+    - cron: '0 16 * * *'
+  workflow_dispatch: # Allows you to run it manually for testing
 
 jobs:
-  build:
+  run-bot:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -18,18 +19,10 @@ jobs:
           node-version: '20'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install @google/generative-ai node-fetch
 
-      - name: Run Script
+      - name: Run Question Script
         run: node question.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          DISCORD_QUESTION_WEBHOOK: ${{ secrets.DISCORD_QUESTION_WEBHOOK }}
-
-      - name: Commit and Push History
-        run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
-          git add current_question.txt question_history.json
-          git commit -m "Update Question of the Day [skip ci]" || echo "No changes to commit"
-          git push
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
