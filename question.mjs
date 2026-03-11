@@ -7,9 +7,8 @@ const CONFIG = {
     DISCORD_URL: process.env.DISCORD_WEBHOOK_URL,
     SAVE_FILE: 'current_fact.txt',
     HISTORY_FILE: 'used_facts.json',
-    // 2026 Models: Optimized for March 2026 API changes
     MODELS: [
-        "gemini-3.1-flash-lite-preview", // March 2026 Workhorse
+        "gemini-3.1-flash-lite-preview", 
         "gemini-3-flash-preview", 
         "gemini-2.5-flash"
     ]
@@ -31,10 +30,8 @@ async function getRandomTopic() {
 }
 
 async function postToDiscord(factData) {
-    if (process.env.DRY_RUN === 'true') {
-        console.log("\n--- DRY RUN: WOULD POST TO DISCORD ---");
-        console.log(`Title: ${factData.eventTitle}\nFact: ${factData.description}\n`);
-        return;
+    if (!CONFIG.DISCORD_URL) {
+        throw new Error("Discord Webhook URL is missing. Check your GitHub Actions Secrets and ENV block.");
     }
 
     const discordPayload = {
@@ -52,7 +49,7 @@ async function postToDiscord(factData) {
         body: JSON.stringify(discordPayload) 
     });
 
-    if (!response.ok) console.error("Discord Post Failed:", await response.text());
+    if (!response.ok) throw new Error(`Discord rejected the post: ${await response.text()}`);
 }
 
 async function main() {
@@ -80,42 +77,54 @@ async function main() {
       "imageUrl": "Direct .jpg/.png link from Wikipedia related to this topic"
     }`;
     
-    // FIX: Explicitly passing the apiVersion handles the "Invalid URL" bug
     const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_KEY);
+    let factData = null;
 
+    // STEP 1: Generate the Fact (Isolating the AI call)
     for (const modelName of CONFIG.MODELS) {
         try {
-            console.log(`Attempting with ${modelName}...`);
-            
-            // FIX: Using the v1beta endpoint manually fixes the URL routing issues
-            const model = genAI.getGenerativeModel({ 
-                model: modelName 
-            }, { apiVersion: 'v1beta' });
-
+            console.log(`Attempting to generate with ${modelName}...`);
+            const model = genAI.getGenerativeModel({ model: modelName }, { apiVersion: 'v1beta' });
             const result = await model.generateContent(prompt);
             const rawText = result.response.text().match(/\{[\s\S]*\}/)[0];
-            const factData = JSON.parse(rawText);
+            factData = JSON.parse(rawText);
 
             if (usedTitles.includes(factData.eventTitle.toLowerCase())) {
                 throw new Error(`Duplicate: ${factData.eventTitle}`);
             }
             
-            factData.generatedDate = todayISO;
-            fs.writeFileSync(CONFIG.SAVE_FILE, JSON.stringify(factData, null, 2));
-            historyData.unshift(factData);
-            fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(historyData, null, 2));
-            
-            await postToDiscord(factData);
-            console.log(`Success! Posted ${factData.eventTitle}.`);
-            return; 
+            console.log(`Success! Generated fact about ${factData.eventTitle}.`);
+            break; // Exit the loop on success
         } catch (err) {
-            console.warn(`⚠️ ${modelName} failed: ${err.message}`);
+            console.warn(`⚠️ ${modelName} AI generation failed: ${err.message}`);
+            factData = null; 
             await new Promise(res => setTimeout(res, 2000));
         }
+    }
+
+    if (!factData) {
+        console.error("💥 All Gemini models failed. Aborting.");
+        process.exit(1);
+    }
+
+    // STEP 2: Save the Fact
+    factData.generatedDate = todayISO;
+    fs.writeFileSync(CONFIG.SAVE_FILE, JSON.stringify(factData, null, 2));
+    historyData.unshift(factData);
+    fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(historyData, null, 2));
+
+    // STEP 3: Post to Discord (Isolating the webhook call)
+    try {
+        console.log("Attempting to post to Discord...");
+        await postToDiscord(factData);
+        console.log("Success! Posted to Discord.");
+    } catch (discordErr) {
+        console.error(`💥 Discord Post Failed: ${discordErr.message}`);
+        process.exit(1);
     }
 }
 
 main().catch(err => {
-    console.error("\n💥 Bot crashed:", err.message);
+    console.error("\n💥 Uncaught Error:", err.message);
     process.exit(1);
 });
