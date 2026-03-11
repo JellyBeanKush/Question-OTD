@@ -7,11 +7,11 @@ const CONFIG = {
     DISCORD_URL: process.env.DISCORD_WEBHOOK_URL,
     SAVE_FILE: 'current_fact.txt',
     HISTORY_FILE: 'used_facts.json',
-    // 2026 Active Models - Ordered by Priority
+    // 2026 Models: Optimized for March 2026 API changes
     MODELS: [
-        "gemini-3.1-flash-lite-preview", 
-        "gemini-3-flash-preview",      
-        "gemini-2.5-flash"             
+        "gemini-3.1-flash-lite-preview", // March 2026 Workhorse
+        "gemini-3-flash-preview", 
+        "gemini-2.5-flash"
     ]
 };
 
@@ -19,7 +19,6 @@ const options = { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Ame
 const displayDate = new Date().toLocaleDateString('en-US', options);
 const todayISO = new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Los_Angeles' });
 
-// Fetches a truly random topic to ensure we never run out of variety
 async function getRandomTopic() {
     try {
         const response = await fetch("https://en.wikipedia.org/api/rest_v1/page/random/summary");
@@ -32,10 +31,9 @@ async function getRandomTopic() {
 }
 
 async function postToDiscord(factData) {
-    // DRY_RUN check for testing: Run with "DRY_RUN=true node bot.mjs"
     if (process.env.DRY_RUN === 'true') {
         console.log("\n--- DRY RUN: WOULD POST TO DISCORD ---");
-        console.log(`Title: ${factData.eventTitle}\nFact: ${factData.description}\nSource: ${factData.sourceUrl}\n`);
+        console.log(`Title: ${factData.eventTitle}\nFact: ${factData.description}\n`);
         return;
     }
 
@@ -58,14 +56,10 @@ async function postToDiscord(factData) {
 }
 
 async function main() {
-    // Skip if already posted today
     if (fs.existsSync(CONFIG.SAVE_FILE)) {
         try {
             const saved = JSON.parse(fs.readFileSync(CONFIG.SAVE_FILE, 'utf8'));
-            if (saved.generatedDate === todayISO) {
-                console.log("Already posted today. Skipping.");
-                return;
-            }
+            if (saved.generatedDate === todayISO) return;
         } catch (e) {}
     }
 
@@ -77,33 +71,33 @@ async function main() {
     const usedTitles = historyData.slice(0, 100).map(h => h.eventTitle.toLowerCase());
     const wikiTopic = await getRandomTopic();
 
-    const prompt = `Task: Provide a mind-blowing fact about: "${wikiTopic.title}".
-    Tone: Conversational ("Did you know..."). Under 40 words.
-    
+    const prompt = `Task: Give a mind-blowing, short fact about: "${wikiTopic.title}".
+    Tone: Fun, conversational. Under 40 words.
     JSON ONLY: {
       "eventTitle": "${wikiTopic.title}",
       "description": "The fact", 
       "sourceUrl": "${wikiTopic.url}",
-      "imageUrl": "A relevant .jpg/.png image link related to this specific topic"
+      "imageUrl": "Direct .jpg/.png link from Wikipedia related to this topic"
     }`;
     
+    // FIX: Explicitly passing the apiVersion handles the "Invalid URL" bug
     const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_KEY);
 
     for (const modelName of CONFIG.MODELS) {
         try {
             console.log(`Attempting with ${modelName}...`);
+            
+            // FIX: Using the v1beta endpoint manually fixes the URL routing issues
             const model = genAI.getGenerativeModel({ 
-                model: modelName,
-                generationConfig: { responseMimeType: "application/json" }
-            });
+                model: modelName 
+            }, { apiVersion: 'v1beta' });
 
             const result = await model.generateContent(prompt);
             const rawText = result.response.text().match(/\{[\s\S]*\}/)[0];
             const factData = JSON.parse(rawText);
 
-            // Logic gate for duplicates
             if (usedTitles.includes(factData.eventTitle.toLowerCase())) {
-                throw new Error(`Duplicate topic: ${factData.eventTitle}`);
+                throw new Error(`Duplicate: ${factData.eventTitle}`);
             }
             
             factData.generatedDate = todayISO;
@@ -112,12 +106,11 @@ async function main() {
             fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(historyData, null, 2));
             
             await postToDiscord(factData);
-            console.log(`Success! Posted fact about ${factData.eventTitle}.`);
+            console.log(`Success! Posted ${factData.eventTitle}.`);
             return; 
         } catch (err) {
             console.warn(`⚠️ ${modelName} failed: ${err.message}`);
-            // Wait 3 seconds before trying the next model to avoid spamming the API
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise(res => setTimeout(res, 2000));
         }
     }
 }
