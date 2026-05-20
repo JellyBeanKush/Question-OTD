@@ -42,3 +42,9 @@ jobs:
           
           # Only commits if a new question was actually added to history or current
           git diff-index --quiet HEAD || (git commit -m "Update QOTD history and current file [skip ci]" && git push)
+      - name: Commit and Push History
+        run: |
+          git config --global user.name "QOTD Bot"
+          git config --global user.email "bot@github.com"
+          git add qotd_history.json current_qotd.txt
+          git diff-index --quiet HEAD || (git commit -m "Update QOTD history and current file [skip ci]" && git push)
