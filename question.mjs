@@ -1,10 +1,13 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import fetch from 'node-fetch';
+import fs from 'fs';
+import path from 'path';
 
 const CONFIG = {
     GEMINI_KEY: process.env.GEMINI_API_KEY,
     DISCORD_URL: process.env.DISCORD_WEBHOOK_URL,
-    MODEL_NAME: "gemini-3.1-flash-lite-preview"
+    MODEL_NAME: "gemini-3.1-flash-lite-preview",
+    HISTORY_FILE: path.join(process.cwd(), 'qotd_history.json')
 };
 
 const dayVibes = {
@@ -26,14 +29,13 @@ const unofficialHolidays = {
     "September 19": "Talk Like a Pirate Day"
 };
 
-// Fixed to send a Rich Embed instead of raw text
 async function postToDiscord(dateTitle, questionText) {
     if (!CONFIG.DISCORD_URL) throw new Error("Missing DISCORD_WEBHOOK_URL environment variable.");
     
     const payload = {
         embeds: [{
             title: `📅 Question of the Day — ${dateTitle}`,
-            color: 0x3498db, // That specific blue color
+            color: 0x3498db,
             description: `**${questionText}**`,
             footer: { text: "Reply to this message to answer!" }
         }]
@@ -56,31 +58,73 @@ async function main() {
     
     const specialEvent = unofficialHolidays[dateKey] || null;
 
+    // 1. Load history to find out what we've already asked
+    let historyData = [];
+    if (fs.existsSync(CONFIG.HISTORY_FILE)) {
+        try {
+            historyData = JSON.parse(fs.readFileSync(CONFIG.HISTORY_FILE, 'utf8'));
+        } catch {
+            console.warn("[History] Resetting file.");
+        }
+    }
+
+    // Extract past questions and general topics for the exclusion filter
+    const recentQuestions = historyData.slice(0, 100).map(h => h.question);
+    const recentTopics = historyData.slice(0, 10).map(h => h.specificTopic);
+
+    // 2. Upgraded prompt forcing topic rotation and rephrase bans
     const prompt = `Today is ${dateKey}. 
     Daily Vibe: ${dayName}.
     Special Event: ${specialEvent ? specialEvent : "None"}.
 
-    Task: Generate ONE engaging "Question of the Day" for a Discord community.
+    Task: Generate ONE highly engaging, completely unique "Question of the Day" for a Discord community.
     
-    STRICT RULES:
+    STRICT COMPLIANCE RULES:
     1. If there is a Special Event, the question MUST be about that.
     2. If no Special Event, the question MUST match the vibe of "${dayName}".
-    3. NO LIFE-AS-A-GAME METAPHORS: No "buffs," "XP," or "leveling up" talk.
-    4. Topic Variety: Rotate between Gaming, Tech, Internet Culture, Movies/Media, and LGBT topics.
-    5. Format: Return ONLY the question. No intros, no "Would You Wednesday!" prefix.
-    6. No spoilers for any story endings.`;
+    3. NO LIFE-AS-A-GAME METAPHORS: Absolutely no "buffs," "XP," "leveling up," or "stats" talk.
+    4. Topic Variety: Rotate between Gaming, Tech, Internet Culture, Movies/Media, and LGBT topics. 
+    5. No spoilers for any story endings.
+    6. ANTI-REPETITION CRITERIA: 
+       - DO NOT use or rephrase any of these recent questions: ${recentQuestions.join(" | ")}
+       - DO NOT focus on these specific angles or core subjects: ${recentTopics.join(", ")}
+       - Make sure the question style and core angle is completely fresh compared to past entries.
+
+    Return ONLY a raw JSON object matching this schema:
+    {
+      "question": "The actual question text here. No intro text, no vibe titles.",
+      "specificTopic": "A 1-2 word description of the exact core subject or item asked about to help filter future runs"
+    }`;
 
     try {
         console.log(`Generating: ${specialEvent || dayName}...`);
         const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_KEY);
-        const model = genAI.getGenerativeModel({ model: CONFIG.MODEL_NAME }, { apiVersion: 'v1beta' });
+        // Using stable generation config for reliable structured JSON output
+        const model = genAI.getGenerativeModel({ 
+            model: CONFIG.MODEL_NAME,
+            generationConfig: { responseMimeType: "application/json" }
+        });
         
         const result = await model.generateContent(prompt);
-        const question = result.response.text().trim().replace(/["']/g, "");
+        const data = JSON.parse(result.response.text());
+        
+        const question = data.question.trim().replace(/["']/g, "");
 
-        // Pass the date and the question separately to the new function
+        // 3. Save new entry to history file
+        const historyEntry = {
+            date: fullDate,
+            vibe: dayName,
+            specialEvent: specialEvent,
+            specificTopic: data.specificTopic.toLowerCase().trim(),
+            question: question
+        };
+        
+        historyData.unshift(historyEntry);
+        fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(historyData.slice(0, 200), null, 2), 'utf8');
+
+        // Post to Discord
         await postToDiscord(fullDate, question);
-        console.log("Successfully posted!");
+        console.log("Successfully posted and saved history!");
 
     } catch (err) {
         console.error("💥 Execution Failed:", err.message);
