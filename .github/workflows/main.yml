@@ -9,6 +9,11 @@ on:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
+    
+    # Grants the workflow permission to save history back to your repository
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -26,3 +31,12 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      - name: Commit and Push History
+        run: |
+          git config --global user.name "QOTD Bot"
+          git config --global user.email "bot@github.com"
+          git add qotd_history.json
+          
+          # Only commits if a new question was actually added to history
+          git diff-index --quiet HEAD || (git commit -m "Update QOTD history [skip ci]" && git push)
