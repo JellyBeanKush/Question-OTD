@@ -76,24 +76,25 @@ async function main() {
     Daily Vibe: ${dayName}.
     Special Event: ${specialEvent ? specialEvent : "None"}.
 
-    Task: Generate ONE highly engaging, completely unique "Question of the Day" for an adult Discord community of gamers and tech/internet culture nerds.
+    Task: Generate ONE highly engaging, conversational "Question of the Day" for a lively adult Discord community. 
     
-    STRICT COMPLIANCE RULES:
-    1. If there is a Special Event, the question MUST be about that.
-    2. If no Special Event, the question MUST match the vibe of "${dayName}".
-    3. NO LIFE-AS-A-GAME METAPHORS: Absolutely no "buffs," "XP," "leveling up," or "stats" talk.
-    4. Topic Variety: Rotate between Gaming, Tech, Internet Culture, Movies/Media, and LGBT topics. 
-    5. No spoilers for any story endings.
-    6. TONE & COMPLEXITY: Keep it simple, fun, punchy, and conversational. Avoid massive, complex "would you rather" conditions. Make it easy to read and instantly answerable.
-    7. MATURITY LEVEL: This is a community of grown adults. You are encouraged to be mature, cheeky, a little risqué, or slightly provocative where appropriate. Do not make it corporate, sanitized, or squeaky clean.
-    8. ANTI-REPETITION CRITERIA: 
-       - DO NOT use or rephrase any of these recent questions: ${recentQuestions.join(" | ")}
-       - DO NOT focus on these specific angles or core subjects: ${recentTopics.join(", ")}
+    HIGH-ENGAGEMENT COMMANDMENTS:
+    1. LOW FRICTION: Keep it under 20 words. No long setups, no complicated conditions, and absolutely no textbook or essay-like phrasing. It must be readable in 2 seconds.
+    2. SPARK DEBATES & LAUGHTER: Ask about petty arguments, hilarious red flags, embarrassing adult realities, or playful "call outs." 
+    3. MATURITY LEVEL: This is a community of grown adults. You are fully encouraged to be cheeky, a little risqué, edgy, or slightly provocative. Drop the sanitized corporate filter completely.
+    4. VARIETY: Rotate between Gaming, Tech, Internet Culture, Movies, and LGBT topics.
+    5. NO METAPHORS: No "buffs," "XP," "leveling up," or "stats" talk. No spoilers for story endings.
+
+    EXAMPLES OF THE EXACT STYLE DESIRED:
+    - "What's a minor red flag in a person that you secretly find kind of hot?"
+    - "What is your absolute most toxic, gatekeep-y video game opinion?"
+    - "Would you rather your entire group chat see your camera roll, or your banking app?"
+    - "What is something that is completely legal, but feels illegal to do?"
 
     Return ONLY a raw JSON object matching this schema:
     {
-      "question": "The actual question text here. No intro text, no vibe titles.",
-      "specificTopic": "A 1-2 word description of the exact core subject or item asked about to help filter future runs"
+      "question": "The snappy, risqué question here.",
+      "specificTopic": "A 1-2 word description of the exact core subject to prevent future duplicates"
     }`;
 
     try {
