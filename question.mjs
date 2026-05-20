@@ -72,12 +72,11 @@ async function main() {
     const recentQuestions = historyData.slice(0, 100).map(h => h.question);
     const recentTopics = historyData.slice(0, 10).map(h => h.specificTopic);
 
-    // 2. Upgraded prompt forcing topic rotation and rephrase bans
     const prompt = `Today is ${dateKey}. 
     Daily Vibe: ${dayName}.
     Special Event: ${specialEvent ? specialEvent : "None"}.
 
-    Task: Generate ONE highly engaging, completely unique "Question of the Day" for a Discord community.
+    Task: Generate ONE highly engaging, completely unique "Question of the Day" for an adult Discord community of gamers and tech/internet culture nerds.
     
     STRICT COMPLIANCE RULES:
     1. If there is a Special Event, the question MUST be about that.
@@ -85,10 +84,11 @@ async function main() {
     3. NO LIFE-AS-A-GAME METAPHORS: Absolutely no "buffs," "XP," "leveling up," or "stats" talk.
     4. Topic Variety: Rotate between Gaming, Tech, Internet Culture, Movies/Media, and LGBT topics. 
     5. No spoilers for any story endings.
-    6. ANTI-REPETITION CRITERIA: 
+    6. TONE & COMPLEXITY: Keep it simple, fun, punchy, and conversational. Avoid massive, complex "would you rather" conditions. Make it easy to read and instantly answerable.
+    7. MATURITY LEVEL: This is a community of grown adults. You are encouraged to be mature, cheeky, a little risqué, or slightly provocative where appropriate. Do not make it corporate, sanitized, or squeaky clean.
+    8. ANTI-REPETITION CRITERIA: 
        - DO NOT use or rephrase any of these recent questions: ${recentQuestions.join(" | ")}
        - DO NOT focus on these specific angles or core subjects: ${recentTopics.join(", ")}
-       - Make sure the question style and core angle is completely fresh compared to past entries.
 
     Return ONLY a raw JSON object matching this schema:
     {
