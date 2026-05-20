@@ -7,6 +7,7 @@ const CONFIG = {
     GEMINI_KEY: process.env.GEMINI_API_KEY,
     DISCORD_URL: process.env.DISCORD_WEBHOOK_URL,
     MODEL_NAME: "gemini-3.1-flash-lite-preview",
+    SAVE_FILE: path.join(process.cwd(), 'current_qotd.txt'),
     HISTORY_FILE: path.join(process.cwd(), 'qotd_history.json')
 };
 
@@ -58,7 +59,7 @@ async function main() {
     
     const specialEvent = unofficialHolidays[dateKey] || null;
 
-    // 1. Load history to find out what we've already asked
+    // 1. Load history to check past entries
     let historyData = [];
     if (fs.existsSync(CONFIG.HISTORY_FILE)) {
         try {
@@ -68,10 +69,10 @@ async function main() {
         }
     }
 
-    // Extract past questions and general topics for the exclusion filter
     const recentQuestions = historyData.slice(0, 100).map(h => h.question);
     const recentTopics = historyData.slice(0, 10).map(h => h.specificTopic);
 
+    // 2. High-Engagement, Risqué Prompt Setup
     const prompt = `Today is ${dateKey}. 
     Daily Vibe: ${dayName}.
     Special Event: ${specialEvent ? specialEvent : "None"}.
@@ -100,7 +101,6 @@ async function main() {
     try {
         console.log(`Generating: ${specialEvent || dayName}...`);
         const genAI = new GoogleGenerativeAI(CONFIG.GEMINI_KEY);
-        // Using stable generation config for reliable structured JSON output
         const model = genAI.getGenerativeModel({ 
             model: CONFIG.MODEL_NAME,
             generationConfig: { responseMimeType: "application/json" }
@@ -111,7 +111,6 @@ async function main() {
         
         const question = data.question.trim().replace(/["']/g, "");
 
-        // 3. Save new entry to history file
         const historyEntry = {
             date: fullDate,
             vibe: dayName,
@@ -120,12 +119,16 @@ async function main() {
             question: question
         };
         
+        // 3. Save to CURRENT file as JSON format inside text
+        fs.writeFileSync(CONFIG.SAVE_FILE, JSON.stringify(historyEntry, null, 2), 'utf8');
+
+        // 4. Save to HISTORY file array
         historyData.unshift(historyEntry);
         fs.writeFileSync(CONFIG.HISTORY_FILE, JSON.stringify(historyData.slice(0, 200), null, 2), 'utf8');
 
-        // Post to Discord
+        // 5. Fire off to Discord
         await postToDiscord(fullDate, question);
-        console.log("Successfully posted and saved history!");
+        console.log("Successfully posted and saved all records!");
 
     } catch (err) {
         console.error("💥 Execution Failed:", err.message);
