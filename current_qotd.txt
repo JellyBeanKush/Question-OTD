@@ -1,0 +1,7 @@
+{
+  "date": "May 20, 2026",
+  "vibe": "Would You Wednesday",
+  "specialEvent": null,
+  "specificTopic": "unpopular opinions",
+  "question": "What is the most Im definitely going to hell for this opinion you hold?"
+}
