@@ -3,6 +3,13 @@
     "date": "May 20, 2026",
     "vibe": "Would You Wednesday",
     "specialEvent": null,
+    "specificTopic": "fictional immersion",
+    "question": "Would you rather have the ability to instantly teleport to any location youve seen in a movie, or have the power to step inside any book and live out its narrative from the perspective of a minor background character?"
+  },
+  {
+    "date": "May 20, 2026",
+    "vibe": "Would You Wednesday",
+    "specialEvent": null,
     "specificTopic": "ai integration",
     "question": "Would you rather have a personal AI assistant that can instantly organize your digital life but can never be turned off, or have an AI that can perfectly predict the next big internet trend but forces you to post about it every single day?"
   }
