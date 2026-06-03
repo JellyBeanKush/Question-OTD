@@ -1,7 +1,7 @@
 {
-  "date": "June 2, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "June 3, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "adulting fails",
-  "question": "What is the most I have zero survival skills adult moment you’ve had this week?"
+  "specificTopic": "food habits",
+  "question": "What is the trashiest snack you hide from your partner so you dont have to share?"
 }
