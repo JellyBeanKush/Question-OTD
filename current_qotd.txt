@@ -1,7 +1,7 @@
 {
-  "date": "June 7, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "June 8, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "adulting laziness",
-  "question": "What’s the most unhinged thing you’ve done because you were too lazy to get out of bed?"
+  "specificTopic": "music tastes",
+  "question": "What is the most embarrassing guilty pleasure song you still secretly blast in your car?"
 }
