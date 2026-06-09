@@ -1,7 +1,7 @@
 {
-  "date": "June 8, 2026",
-  "vibe": "Moody Monday",
+  "date": "June 9, 2026",
+  "vibe": "Tasty Tuesday",
   "specialEvent": null,
-  "specificTopic": "music tastes",
-  "question": "What is the most embarrassing guilty pleasure song you still secretly blast in your car?"
+  "specificTopic": "dating dealbreakers",
+  "question": "What is the pettiest reason you have ever dumped someone or stopped talking to them?"
 }
