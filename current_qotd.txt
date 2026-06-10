@@ -1,7 +1,7 @@
 {
-  "date": "June 9, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "June 10, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "dating dealbreakers",
-  "question": "What is the pettiest reason you have ever dumped someone or stopped talking to them?"
+  "specificTopic": "social etiquette",
+  "question": "What is the most Im definitely going to hell thought youve ever had during a funeral?"
 }
