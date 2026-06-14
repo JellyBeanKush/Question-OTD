@@ -1,7 +1,7 @@
 {
-  "date": "June 13, 2026",
-  "vibe": "Silly Saturday",
+  "date": "June 14, 2026",
+  "vibe": "Sleepy Sunday",
   "specialEvent": null,
-  "specificTopic": "dating pet peeves",
-  "question": "What is the pettiest reason you have ever dumped someone?"
+  "specificTopic": "unpopular opinions",
+  "question": "What is the most Im definitely going to hell for this opinion you hold?"
 }
