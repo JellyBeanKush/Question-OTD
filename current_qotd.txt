@@ -1,7 +1,7 @@
 {
-  "date": "June 16, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "June 17, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "dating etiquette",
-  "question": "What is the pettiest reason you have ever completely ghosted someone?"
+  "specificTopic": "social anxiety",
+  "question": "What is the most chaotic, unhinged thing you’ve done just to avoid an awkward social interaction?"
 }
