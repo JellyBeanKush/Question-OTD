@@ -1,7 +1,7 @@
 {
-  "date": "June 20, 2026",
-  "vibe": "Silly Saturday",
+  "date": "June 21, 2026",
+  "vibe": "Sleepy Sunday",
   "specialEvent": null,
-  "specificTopic": "dating red-flags",
-  "question": "What is the pettiest reason you have ever dumped someone or stopped talking to them?"
+  "specificTopic": "music tastes",
+  "question": "What is the most embarrassing guilty pleasure song you’d be mortified to have your date discover?"
 }
