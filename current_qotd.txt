@@ -1,7 +1,7 @@
 {
-  "date": "June 21, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "June 22, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "music tastes",
-  "question": "What is the most embarrassing guilty pleasure song you’d be mortified to have your date discover?"
+  "specificTopic": "internet search history",
+  "question": "What is the most unhinged thing you have ever googled in the middle of the night?"
 }
