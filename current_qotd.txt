@@ -1,7 +1,7 @@
 {
-  "date": "June 22, 2026",
-  "vibe": "Moody Monday",
+  "date": "June 23, 2026",
+  "vibe": "Tasty Tuesday",
   "specialEvent": null,
-  "specificTopic": "internet search history",
-  "question": "What is the most unhinged thing you have ever googled in the middle of the night?"
+  "specificTopic": "food habits",
+  "question": "What is the most unhinged meal you’ve ever prepared because you were too lazy to grocery shop?"
 }
