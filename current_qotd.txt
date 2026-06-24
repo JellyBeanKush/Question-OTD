@@ -1,7 +1,7 @@
 {
-  "date": "June 23, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "June 24, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "food habits",
-  "question": "What is the most unhinged meal you’ve ever prepared because you were too lazy to grocery shop?"
+  "specificTopic": "dating failures",
+  "question": "What’s the most embarrassing thing you’ve ever done to get a crush’s attention?"
 }
