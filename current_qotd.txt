@@ -1,7 +1,7 @@
 {
-  "date": "June 24, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "June 25, 2026",
+  "vibe": "Thirsty Thursday",
   "specialEvent": null,
-  "specificTopic": "dating failures",
-  "question": "What’s the most embarrassing thing you’ve ever done to get a crush’s attention?"
+  "specificTopic": "food habits",
+  "question": "What is the trashiest snack you hide from your partner so you dont have to share?"
 }
