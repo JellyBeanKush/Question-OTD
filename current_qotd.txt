@@ -1,7 +1,7 @@
 {
-  "date": "June 25, 2026",
-  "vibe": "Thirsty Thursday",
+  "date": "June 26, 2026",
+  "vibe": "Fave Friday",
   "specialEvent": null,
-  "specificTopic": "food habits",
-  "question": "What is the trashiest snack you hide from your partner so you dont have to share?"
+  "specificTopic": "social anxiety",
+  "question": "What is the most embarrassing lie you’ve told to get out of a social obligation?"
 }
