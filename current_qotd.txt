@@ -1,7 +1,7 @@
 {
-  "date": "June 28, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "June 29, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "sleep habits",
-  "question": "What is the most embarrassing thing you’ve done while being sleep-deprived?"
+  "specificTopic": "dark humor",
+  "question": "What is the most Im definitely going to hell for this joke you’ve ever laughed at?"
 }
