@@ -1,7 +1,7 @@
 {
-  "date": "July 1, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "July 2, 2026",
+  "vibe": "Thirsty Thursday",
   "specialEvent": null,
-  "specificTopic": "food habits",
-  "question": "What is the trashiest snack you secretly love and would be embarrassed to be caught eating?"
+  "specificTopic": "personal habits",
+  "question": "What is the most unhinged thing you’ve done just because you were bored at 3 AM?"
 }
