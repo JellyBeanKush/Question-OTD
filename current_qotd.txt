@@ -1,7 +1,7 @@
 {
-  "date": "July 3, 2026",
-  "vibe": "Fave Friday",
+  "date": "July 4, 2026",
+  "vibe": "Silly Saturday",
   "specialEvent": null,
-  "specificTopic": "dating fails",
-  "question": "What’s the most embarrassing thing you’ve ever done to impress someone you were flirting with?"
+  "specificTopic": "food habits",
+  "question": "What is the trashiest meal you secretly love eating when no one is watching?"
 }
