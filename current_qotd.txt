@@ -1,7 +1,7 @@
 {
-  "date": "July 4, 2026",
-  "vibe": "Silly Saturday",
+  "date": "July 5, 2026",
+  "vibe": "Sleepy Sunday",
   "specialEvent": null,
-  "specificTopic": "food habits",
-  "question": "What is the trashiest meal you secretly love eating when no one is watching?"
+  "specificTopic": "unpopular opinions",
+  "question": "What is the most I’m definitely going to hell for this opinion you hold?"
 }
