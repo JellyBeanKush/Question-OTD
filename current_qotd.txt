@@ -1,7 +1,7 @@
 {
-  "date": "July 5, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "July 6, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "unpopular opinions",
-  "question": "What is the most I’m definitely going to hell for this opinion you hold?"
+  "specificTopic": "dating etiquette",
+  "question": "What is the pettiest reason youve ever completely ghosted someone?"
 }
