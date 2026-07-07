@@ -1,7 +1,7 @@
 {
-  "date": "July 6, 2026",
-  "vibe": "Moody Monday",
+  "date": "July 7, 2026",
+  "vibe": "Tasty Tuesday",
   "specialEvent": null,
-  "specificTopic": "dating etiquette",
-  "question": "What is the pettiest reason youve ever completely ghosted someone?"
+  "specificTopic": "personal embarrassment",
+  "question": "What is the most embarrassing thing you’ve done while drunk that you still think about at 3 AM?"
 }
