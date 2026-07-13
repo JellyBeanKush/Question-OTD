@@ -1,7 +1,7 @@
 {
-  "date": "July 12, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "July 13, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "social mishaps",
-  "question": "What is the most I shouldnt have said that moment you’ve had while drunk at a party?"
+  "specificTopic": "personal hobbies",
+  "question": "What is a childish hobby you refuse to give up, no matter how much people judge you?"
 }
