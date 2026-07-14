@@ -1,7 +1,7 @@
 {
-  "date": "July 13, 2026",
-  "vibe": "Moody Monday",
+  "date": "July 14, 2026",
+  "vibe": "Tasty Tuesday",
   "specialEvent": null,
-  "specificTopic": "personal hobbies",
-  "question": "What is a childish hobby you refuse to give up, no matter how much people judge you?"
+  "specificTopic": "food habits",
+  "question": "What is the most unhinged meal you’ve ever prepared because you were too lazy to grocery shop?"
 }
