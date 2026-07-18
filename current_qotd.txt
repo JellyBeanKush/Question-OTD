@@ -1,7 +1,7 @@
 {
-  "date": "July 17, 2026",
-  "vibe": "Fave Friday",
+  "date": "July 18, 2026",
+  "vibe": "Silly Saturday",
   "specialEvent": null,
-  "specificTopic": "personal embarrassment",
-  "question": "What is the most unhinged thing you have ever done while blackout drunk?"
+  "specificTopic": "personal behavior",
+  "question": "What is the most unhinged thing you have ever done while home alone?"
 }
