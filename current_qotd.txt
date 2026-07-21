@@ -1,7 +1,7 @@
 {
-  "date": "July 20, 2026",
-  "vibe": "Moody Monday",
+  "date": "July 21, 2026",
+  "vibe": "Tasty Tuesday",
   "specialEvent": null,
-  "specificTopic": "dating dealbreakers",
-  "question": "What is the pettiest reason you have ever dumped someone or stopped talking to them?"
+  "specificTopic": "social embarrassment",
+  "question": "What is the most embarrassing thing you’ve done while being absolutely convinced no one was watching?"
 }
