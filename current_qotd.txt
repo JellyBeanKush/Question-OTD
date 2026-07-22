@@ -1,7 +1,7 @@
 {
-  "date": "July 21, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "July 22, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "social embarrassment",
-  "question": "What is the most embarrassing thing you’ve done while being absolutely convinced no one was watching?"
+  "specificTopic": "food habits",
+  "question": "What is the trashiest snack you hide from your partner so you don’t have to share?"
 }
