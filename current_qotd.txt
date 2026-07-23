@@ -1,7 +1,7 @@
 {
-  "date": "July 22, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "July 23, 2026",
+  "vibe": "Thirsty Thursday",
   "specialEvent": null,
-  "specificTopic": "food habits",
-  "question": "What is the trashiest snack you hide from your partner so you don’t have to share?"
+  "specificTopic": "unpopular opinions",
+  "question": "What is the most I’m definitely going to hell for this opinion you hold?"
 }
