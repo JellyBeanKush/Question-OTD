@@ -1,7 +1,7 @@
 {
-  "date": "July 24, 2026",
-  "vibe": "Fave Friday",
+  "date": "July 25, 2026",
+  "vibe": "Silly Saturday",
   "specialEvent": null,
   "specificTopic": "adulting fails",
-  "question": "What is the most I have zero life skills moment you’ve had as an adult?"
+  "question": "What is the most adult purchase you’ve made that turned out to be a complete waste of money?"
 }
