@@ -1,7 +1,7 @@
 {
-  "date": "August 2, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "August 3, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "social anxiety",
-  "question": "What is the most embarrassing thing you’ve done just to avoid an awkward conversation?"
+  "specificTopic": "personal habits",
+  "question": "What is the most embarrassing adult habit you have that you would never admit on a first date?"
 }
