@@ -1,7 +1,7 @@
 {
-  "date": "August 5, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "August 7, 2026",
+  "vibe": "Fave Friday",
   "specialEvent": null,
-  "specificTopic": "dating behavior",
-  "question": "What is the pettiest reason you have ever completely ghosted someone?"
+  "specificTopic": "shopping regrets",
+  "question": "What is the most embarrassing adult purchase you made that you immediately regretted?"
 }
