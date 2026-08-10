@@ -1,7 +1,7 @@
 {
-  "date": "August 9, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "August 10, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "personal habits",
-  "question": "What is the most unhinged thing you have ever done while home alone on a Sunday?"
+  "specificTopic": "dating dealbreakers",
+  "question": "What is the pettiest reason you have ever dumped someone or stopped talking to them?"
 }
