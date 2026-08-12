@@ -1,7 +1,7 @@
 {
-  "date": "August 11, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "August 12, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "music guilt",
-  "question": "What is the most embarrassing guilty pleasure song you’d be mortified to be caught singing at karaoke?"
+  "specificTopic": "music tastes",
+  "question": "What is the most embarrassing guilty pleasure song you secretly have on your main playlist?"
 }
