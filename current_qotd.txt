@@ -1,7 +1,7 @@
 {
-  "date": "August 12, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "August 13, 2026",
+  "vibe": "Thirsty Thursday",
   "specialEvent": null,
-  "specificTopic": "music tastes",
-  "question": "What is the most embarrassing guilty pleasure song you secretly have on your main playlist?"
+  "specificTopic": "personal chaos",
+  "question": "What is the most unhinged thing you’ve done while blackout drunk that you refuse to apologize for?"
 }
