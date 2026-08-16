@@ -1,7 +1,7 @@
 {
-  "date": "August 15, 2026",
-  "vibe": "Silly Saturday",
+  "date": "August 16, 2026",
+  "vibe": "Sleepy Sunday",
   "specialEvent": null,
-  "specificTopic": "food habits",
-  "question": "What is the trashiest meal you secretly love eating when no one is watching?"
+  "specificTopic": "internet culture",
+  "question": "What is the most I shouldnt be laughing at this meme currently saved in your phone?"
 }
