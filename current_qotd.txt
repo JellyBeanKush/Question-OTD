@@ -1,7 +1,7 @@
 {
-  "date": "August 16, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "August 17, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "internet culture",
-  "question": "What is the most I shouldnt be laughing at this meme currently saved in your phone?"
+  "specificTopic": "nightlife behavior",
+  "question": "What is the most unhinged thing you’ve done when you were absolutely wasted?"
 }
