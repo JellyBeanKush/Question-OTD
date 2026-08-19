@@ -1,7 +1,7 @@
 {
-  "date": "August 18, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "August 19, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "food habits",
-  "question": "What is the most unhinged meal you’ve ever prepared while home alone and starving?"
+  "specificTopic": "dating behavior",
+  "question": "What is the most unhinged thing you have ever done to get someone’s attention?"
 }
