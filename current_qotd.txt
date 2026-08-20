@@ -1,7 +1,7 @@
 {
-  "date": "August 19, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "August 20, 2026",
+  "vibe": "Thirsty Thursday",
   "specialEvent": null,
-  "specificTopic": "dating behavior",
-  "question": "What is the most unhinged thing you have ever done to get someone’s attention?"
+  "specificTopic": "personal embarrassment",
+  "question": "What is the most unhinged thing you have ever done while blackout drunk?"
 }
