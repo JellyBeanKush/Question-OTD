@@ -1,7 +1,7 @@
 {
-  "date": "August 22, 2026",
-  "vibe": "Silly Saturday",
+  "date": "August 23, 2026",
+  "vibe": "Sleepy Sunday",
   "specialEvent": null,
-  "specificTopic": "internet culture",
-  "question": "What is the most embarrassing thing youve ever Googled because you were too afraid to ask a human?"
+  "specificTopic": "adulting regrets",
+  "question": "What is the most Im definitely an adult now purchase you regret making?"
 }
