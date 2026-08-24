@@ -1,7 +1,7 @@
 {
-  "date": "August 23, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "August 24, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "adulting regrets",
-  "question": "What is the most Im definitely an adult now purchase you regret making?"
+  "specificTopic": "dating dealbreakers",
+  "question": "What is the pettiest reason you have ever dumped someone or stopped talking to them?"
 }
