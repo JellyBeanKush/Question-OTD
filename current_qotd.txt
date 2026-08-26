@@ -1,7 +1,7 @@
 {
-  "date": "August 25, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "August 26, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "dating red flags",
-  "question": "What’s the most petty, non-negotiable ick that immediately kills your interest in someone?"
+  "specificTopic": "personal humor",
+  "question": "What is the most I shouldnt be laughing at this moment that has ever happened to you?"
 }
