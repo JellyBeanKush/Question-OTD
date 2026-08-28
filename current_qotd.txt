@@ -1,7 +1,7 @@
 {
-  "date": "August 26, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "August 27, 2026",
+  "vibe": "Fave Friday",
   "specialEvent": null,
-  "specificTopic": "personal humor",
-  "question": "What is the most I shouldnt be laughing at this moment that has ever happened to you?"
+  "specificTopic": "adulting failures",
+  "question": "What is the most embarrassing adult habit you still havent managed to grow out of?"
 }
