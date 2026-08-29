@@ -1,7 +1,7 @@
 {
-  "date": "August 28, 2026",
+  "date": "August 29, 2026",
   "vibe": "Silly Saturday",
   "specialEvent": null,
-  "specificTopic": "adulting fails",
-  "question": "What is the most I shouldnt be allowed to make adult decisions thing you’ve done this week?"
+  "specificTopic": "personal embarrassment",
+  "question": "What is the most embarrassing thing you’ve done while you thought nobody was watching?"
 }
