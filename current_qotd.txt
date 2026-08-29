@@ -1,7 +1,7 @@
 {
-  "date": "August 27, 2026",
-  "vibe": "Fave Friday",
+  "date": "August 28, 2026",
+  "vibe": "Silly Saturday",
   "specialEvent": null,
-  "specificTopic": "adulting failures",
-  "question": "What is the most embarrassing adult habit you still havent managed to grow out of?"
+  "specificTopic": "adulting fails",
+  "question": "What is the most I shouldnt be allowed to make adult decisions thing you’ve done this week?"
 }
