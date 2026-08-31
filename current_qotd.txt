@@ -1,7 +1,7 @@
 {
-  "date": "August 29, 2026",
-  "vibe": "Silly Saturday",
+  "date": "August 31, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "personal embarrassment",
-  "question": "What is the most embarrassing thing you’ve done while you thought nobody was watching?"
+  "specificTopic": "dating red-flags",
+  "question": "What’s the most petty reason you’ve immediately ghosted someone after a first date?"
 }
