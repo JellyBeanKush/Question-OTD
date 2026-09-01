@@ -1,7 +1,7 @@
 {
-  "date": "August 31, 2026",
-  "vibe": "Moody Monday",
+  "date": "September 1, 2026",
+  "vibe": "Tasty Tuesday",
   "specialEvent": null,
-  "specificTopic": "dating red-flags",
-  "question": "What’s the most petty reason you’ve immediately ghosted someone after a first date?"
+  "specificTopic": "food habits",
+  "question": "What is the trashiest meal you secretly love eating when nobody is watching?"
 }
