@@ -1,7 +1,7 @@
 {
-  "date": "September 1, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "September 2, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "food habits",
-  "question": "What is the trashiest meal you secretly love eating when nobody is watching?"
+  "specificTopic": "adult habits",
+  "question": "What is a childish habit you still refuse to give up as an adult?"
 }
