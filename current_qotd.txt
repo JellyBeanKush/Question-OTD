@@ -1,7 +1,7 @@
 {
-  "date": "September 2, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "September 3, 2026",
+  "vibe": "Thirsty Thursday",
   "specialEvent": null,
-  "specificTopic": "adult habits",
-  "question": "What is a childish habit you still refuse to give up as an adult?"
+  "specificTopic": "music tastes",
+  "question": "What is the most embarrassing guilty pleasure song you secretly have on your main playlist?"
 }
