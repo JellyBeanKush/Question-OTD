@@ -1,7 +1,7 @@
 {
-  "date": "September 3, 2026",
-  "vibe": "Thirsty Thursday",
+  "date": "September 4, 2026",
+  "vibe": "Fave Friday",
   "specialEvent": null,
-  "specificTopic": "music tastes",
-  "question": "What is the most embarrassing guilty pleasure song you secretly have on your main playlist?"
+  "specificTopic": "dating mishaps",
+  "question": "What’s the most embarrassing thing you’ve ever done while trying to impress a crush?"
 }
