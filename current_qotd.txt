@@ -1,7 +1,7 @@
 {
-  "date": "September 4, 2026",
-  "vibe": "Fave Friday",
+  "date": "September 5, 2026",
+  "vibe": "Silly Saturday",
   "specialEvent": null,
-  "specificTopic": "dating mishaps",
-  "question": "What’s the most embarrassing thing you’ve ever done while trying to impress a crush?"
+  "specificTopic": "social embarrassment",
+  "question": "What is the most embarrassing thing you’ve done while being absolutely convinced no one was watching?"
 }
