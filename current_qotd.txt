@@ -1,7 +1,7 @@
 {
-  "date": "September 5, 2026",
-  "vibe": "Silly Saturday",
+  "date": "September 6, 2026",
+  "vibe": "Sleepy Sunday",
   "specialEvent": null,
-  "specificTopic": "social embarrassment",
-  "question": "What is the most embarrassing thing you’ve done while being absolutely convinced no one was watching?"
+  "specificTopic": "nightlife behavior",
+  "question": "What is the most unhinged thing you’ve done when you were absolutely wasted?"
 }
