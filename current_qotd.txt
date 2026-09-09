@@ -1,7 +1,7 @@
 {
-  "date": "September 8, 2026",
-  "vibe": "Tasty Tuesday",
+  "date": "September 9, 2026",
+  "vibe": "Would You Wednesday",
   "specialEvent": null,
-  "specificTopic": "food",
-  "question": "What is the most unhinged meal youve ever cooked while completely hungover?"
+  "specificTopic": "adulting reality",
+  "question": "What is the most Im a functioning adult purchase you’ve made that actually feels like a scam?"
 }
