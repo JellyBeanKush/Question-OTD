@@ -1,7 +1,7 @@
 {
-  "date": "September 9, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "September 10, 2026",
+  "vibe": "Thirsty Thursday",
   "specialEvent": null,
-  "specificTopic": "adulting reality",
-  "question": "What is the most Im a functioning adult purchase you’ve made that actually feels like a scam?"
+  "specificTopic": "personal embarrassment",
+  "question": "What is the most embarrassing thing you’ve done while you thought you were completely alone?"
 }
