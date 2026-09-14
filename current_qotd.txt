@@ -1,7 +1,7 @@
 {
-  "date": "September 13, 2026",
-  "vibe": "Sleepy Sunday",
+  "date": "September 14, 2026",
+  "vibe": "Moody Monday",
   "specialEvent": null,
-  "specificTopic": "shopping habits",
-  "question": "What is the most embarrassing adult purchase youve made that you refuse to admit to?"
+  "specificTopic": "adulting",
+  "question": "What is the most embarrassing adult chore you still have absolutely no idea how to do properly?"
 }
