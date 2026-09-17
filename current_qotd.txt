@@ -1,7 +1,7 @@
 {
-  "date": "September 16, 2026",
-  "vibe": "Would You Wednesday",
+  "date": "September 17, 2026",
+  "vibe": "Thirsty Thursday",
   "specialEvent": null,
-  "specificTopic": "music tastes",
-  "question": "What is the most embarrassing guilty pleasure song you secretly have on a main playlist?"
+  "specificTopic": "dating dealbreakers",
+  "question": "What is the pettiest reason you have ever dumped someone or stopped talking to them?"
 }
